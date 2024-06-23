@@ -1,0 +1,19 @@
+--- a/drivers/gpio/gpio-mmio.c
++++ b/drivers/gpio/gpio-mmio.c
+@@ -59,6 +59,7 @@
+ #include <linux/mod_devicetable.h>
+ #include <linux/of.h>
+ #include <linux/of_device.h>
++#include <linux/minmax.h>
+ 
+ #include "gpiolib.h"
+ 
+@@ -623,7 +624,7 @@
+ 	if (ret)
+ 		gc->ngpio = gc->bgpio_bits;
+ 	else
+-		gc->bgpio_bits = roundup_pow_of_two(round_up(gc->ngpio, 8));
++		gc->bgpio_bits = umax(gc->bgpio_bits, roundup_pow_of_two(round_up(gc->ngpio, 8)));
+ 
+ 	ret = bgpio_setup_io(gc, dat, set, clr, flags);
+ 	if (ret)
