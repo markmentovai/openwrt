@@ -1148,6 +1148,9 @@ static int rtl8366s_mii_read(struct mii_bus *bus, int addr, int reg)
 	u32 val = 0;
 	int err;
 
+	if (reg == MII_MMD_CTRL || reg == MII_MMD_DATA)
+		return -EOPNOTSUPP;
+
 	err = rtl8366s_read_phy_reg(smi, addr, 0, reg, &val);
 	if (err)
 		return 0xffff;
@@ -1160,6 +1163,9 @@ static int rtl8366s_mii_write(struct mii_bus *bus, int addr, int reg, u16 val)
 	struct rtl8366_smi *smi = bus->priv;
 	u32 t;
 	int err;
+
+	if (reg == MII_MMD_CTRL || reg == MII_MMD_DATA)
+		return -EOPNOTSUPP;
 
 	err = rtl8366s_write_phy_reg(smi, addr, 0, reg, val);
 	/* flush write */
