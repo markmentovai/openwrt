@@ -32,7 +32,7 @@ Signed-off-by: John Thomson <git@johnthomson.fastmail.com.au>
 + * data and functionality from drivers/watchdog/qcom-wdt.c
 + * address from arch/arm/boot/dts/qcom-ipq4019.dtsi
 + */
-+#ifdef ARCH_QCOM_IPQ40XX_BOOT_COMPRESSED_PET_WATCHDOG_EARLY
++#ifdef CONFIG_ARCH_QCOM_IPQ40XX_BOOT_COMPRESSED_PET_WATCHDOG_EARLY
 +watchdog_set:
 +		/* offsets:
 +		 * 0x04 reset	(=1 resets countdown)
@@ -59,7 +59,7 @@ Signed-off-by: John Thomson <git@johnthomson.fastmail.com.au>
 +		mov r1, #1
 +		str r1, [r0, #0x08]	@Enable the watchdog
 +watchdog_finished:
-+#endif /* ARCH_QCOM_IPQ40XX_BOOT_COMPRESSED_PET_WATCHDOG_EARLY */
++#endif /* CONFIG_ARCH_QCOM_IPQ40XX_BOOT_COMPRESSED_PET_WATCHDOG_EARLY */
 +
  /*
   * The C runtime environment should now be setup sufficiently.
